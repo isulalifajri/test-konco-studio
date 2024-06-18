@@ -30,11 +30,14 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    
+    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', function(){
         return view('backend.page.dashboard', [
             'title' => 'Halaman Dashboard',
         ]);
-    });
-
-    Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+    });    
 });
