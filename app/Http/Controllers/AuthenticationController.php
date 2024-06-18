@@ -27,7 +27,11 @@ class AuthenticationController extends Controller
             ]);
         }
 
-        return redirect('/');
+        if(auth()->user()->role === 'admin'){
+            return redirect()->intended('/dashboard');
+        }else{
+            return redirect()->intended('/');
+        }
     }
 
     public function logout(Request $request)
