@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         return view('backend.page.dashboard', [
             'title' => 'Halaman Dashboard',
         ]);
-    });    
+    });   
+    
+    // product
+    Route::get('product', [ProductController::class, 'index'])->name('product');
+    Route::patch('product/updateStatus/{id}', [ProductController::class, 'updateStatus'])->name('updateStatus');
+    Route::put('product/updateStok/{id}', [ProductController::class, 'updateStok'])->name('updateStok');
+    Route::delete('product/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
 });

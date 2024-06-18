@@ -220,6 +220,20 @@
     </div>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="my-3">
+        @if(Session::has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+        @endif
+        @if(Session::has('success-danger'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ Session::get('success-danger') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+        @endif
+    </div>
       @yield('content')
     </main>
   </div>
