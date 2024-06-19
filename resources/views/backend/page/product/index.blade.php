@@ -7,6 +7,7 @@
 
   <h2>List Data Product</h2>
       <div class="table-responsive small">
+        <a href="{{ route('tambah-data') }}" class="btn btn-primary">Tambah Data</a>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -23,7 +24,7 @@
             @forelse ($products as $paginate => $item)
                 <tr>
                     <td>{{ $products->firstItem() + $paginate }}</td>
-                    <td><img src="{{ $item->image }}" alt="" width="70px"></td>
+                    <td><img src="{{ $item->products_url }}" alt="{{ $item->title }}" width="70px"></td>
                     <td class="align-middle">{{ $item->title }}</td>
                     <td class="align-middle">
                         <form action="{{ route('updateStatus', ['id' => $item->id]) }}" method="POST">
@@ -41,6 +42,7 @@
                             </div>
                             <input type="hidden" name="isActive" value="{{ $item->isActive == 1 ? 0 : 1 }}">
                         </form>
+                    </td>
                     <td class="align-middle"> <span class="badge {{ $item->isActive == '1' ? 'bg-primary' : 'bg-info'  }}">{{ $item->isActive == '1' ? 'Active' : 'Tidak Active'  }}</span></td>
                     <td class="align-middle">
                         <div class="d-table-cell w-100">
@@ -53,11 +55,14 @@
                         </div>
                     </td>
                     <td class="align-middle">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('destroy', $item->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <div class="d-flex gap-1">
+                            <a href="{{ route('product.edit', $item->id)  }}" class="btn btn-info btn-sm">Edit</a>
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('destroy', $item->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty

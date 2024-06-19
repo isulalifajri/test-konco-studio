@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -44,7 +45,14 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     
     // product
     Route::get('product', [ProductController::class, 'index'])->name('product');
+    Route::get('product/tambah-data', [ProductController::class, 'create'])->name('tambah-data');
+    Route::post('product/store', [ProductController::class, 'store'])->name('store');
+    Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('product/{id}/update', [ProductController::class, 'update'])->name('product.update');
     Route::patch('product/updateStatus/{id}', [ProductController::class, 'updateStatus'])->name('updateStatus');
     Route::put('product/updateStok/{id}', [ProductController::class, 'updateStok'])->name('updateStok');
     Route::delete('product/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
+
+    // customer 
+    Route::get('customer', [CustomerController::class, 'index'])->name('customer');
 });

@@ -239,5 +239,17 @@
   </div>
 </div>
     <script src="{{ asset('assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+
+    @if(request()->is('product*'))
+      <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+      <script>
+          var cks = document.querySelectorAll("#my-editor");
+          for(var y = 0; y < cks.length; y++) {
+              CKEDITOR.replace(cks[y]);
+            }
+      </script>
+      @stack('prv-img')
+      @stack('masking')
+    @endif
 </body>
 </html>
