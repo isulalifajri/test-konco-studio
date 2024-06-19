@@ -71,7 +71,7 @@ class ProductController extends Controller
             'price' => 'required',
             'description' => 'required',
             'stok' => ['required','numeric'],
-            'image' => ['required','image','file']
+            'image' => ['image','file']
         ];
 
         $dt = date('Y-m-d_His_a');
