@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -27,7 +29,7 @@ use App\Http\Controllers\ProductController;
 //     ]);
 // });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
 Route::get('detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detail.product');
 
 
@@ -37,8 +39,10 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/checkout/{id}', [MidtransController::class, 'checkoutMidtrans'])->name('checkout-midtrans');
     
     Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+    Route::get('/order/cancel/{id}', [OrderController::class, 'batalkan'])->name('batalkan');
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -47,6 +51,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
             'title' => 'Halaman Dashboard',
         ]);
     });   
+
+    // order 
+    Route::get('order', [OrderController::class, 'index'])->name('order');
     
     // product
     Route::get('product', [ProductController::class, 'index'])->name('product');
