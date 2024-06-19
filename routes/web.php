@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -20,11 +21,15 @@ use App\Http\Controllers\ProductController;
 //     return view('welcome');
 // });
 
-Route::get('/', function() {
-    return view('frontend.page.home', [
-        'title' => 'Halaman Home',
-    ]);
-});
+// Route::get('/', function() {
+//     return view('frontend.page.home', [
+//         'title' => 'Halaman Home',
+//     ]);
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('detail-product/{id}', [HomeController::class, 'detailProduct'])->name('detail.product');
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthenticationController::class, 'login'])->name('login');

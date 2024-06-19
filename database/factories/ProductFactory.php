@@ -20,7 +20,7 @@ class ProductFactory extends Factory
             'title' => fake()->word(rand(3, 5), true),
             'description' => fake()->paragraph,
             'image' => fake()->imageUrl($width = 640, $height = 480), // Menghasilkan URL gambar
-            'price' => fake()->randomFloat(2, 10, 1000), // Menghasilkan harga antara 10 dan 1000 dengan 2 digit desimal
+           'price' => round(fake()->randomFloat(2, 10, 1000)), // Ubah float ke integer dengan round()
             'isActive' => fake()->numberBetween(0, 1), // Menghasilkan 0 atau 1
             'stok' => fake()->numberBetween(0, 100), // Menghasilkan stok antara 0 dan 100
         ];
